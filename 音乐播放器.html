@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.music {
+				width: 320px;
+				height: 80px;
+				background-color: grey;
+				padding: 20px;
+			}
+			
+			.music>div {
+				float: left;
+			}
+			
+			.music .image {}
+			
+			.music .image img {
+				width: 80px;
+				height: 80px;
+				border-radius: 40px;
+				-webkit-animation: rotate 5s 0s linear infinite;
+				-webkit-animation-play-state: paused;
+			}
+			
+			.btn-group {
+				padding-top: 27px;
+				padding-left: 20px;
+			}
+			
+			.btn-group .btn {
+				float: left;
+				margin-right: 10px;
+				background-image: url(images/ico_btn_player.png);
+				background-repeat: no-repeat;
+			}
+			
+			.btn-prev {
+				position: relative;
+				top: 3px;
+				width: 16px;
+				height: 20px;
+				background-position: -90px 0;
+			}
+			
+			.btn-next {
+				position: relative;
+				top: 3px;
+				width: 16px;
+				height: 20px;
+				background-position: -90px -30px;
+			}
+			
+			.btn-play {
+				width: 22px;
+				height: 26px;
+				background-position: -90px -60px;
+			}
+			
+			.btn-pause {
+				width: 22px;
+				height: 26px;
+				background-position: -90px -90px;
+			}
+			
+			.music-info {
+				float: right;
+				padding-top: 26px;
+			}
+			
+			.music-info p {
+				text-align: right;
+				margin: 0px;
+			}
+			
+			@-webkit-keyframes rotate {
+				from {
+					-webkit-transform: rotate(0deg);
+				}
+				to {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="music">
+
+			<div class="image">
+				<img src="images/kuaizixiongdi.jpeg">
+			</div>
+			<div class="btn-group">
+				<div class="btn btn-prev"></div>
+				<div class="btn btn-play"></div>
+				<div class="btn btn-next"></div>
+			</div>
+			<div class="music-info">
+				<input type="range" min="0" max="100" value="0" value="" />
+				<p><span id="str">00:00</span>/<span id="end">00:00</span></p>
+			</div>
+			<audio id="music">
+				<source src="media/小苹果.mp3"></source>
+			</audio>
+		</div>
+		<script type="text/javascript">
+			var mp3 = document.getElementById("music");
+			var playBtn = document.querySelector(".btn-play");
+			var image = document.querySelector(".image img");
+			var strat=document.getElementById("str");
+			var curt=parseInt(this.currentTime);
+			strat.innerHTML="0"+parseInt(curt/60)+":"+(curt%60);
+
+			playBtn.onclick = function() {
+				if (mp3.paused) {
+					mp3.play();
+					this.className = "btn btn-pause";
+					image.style.webkitAnimationPlayState = "running";
+				} else {
+					mp3.pause();
+					this.className = "btn btn-play";
+					image.style.webkitAnimationPlayState = "paused";
+				}
+			}
+		</script>
+
+	</body>
+
+</html>
